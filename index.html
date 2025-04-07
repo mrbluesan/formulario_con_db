@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Usuario | Hleyton</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Fuente Inter */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Estilo para inputs inválidos (complementa Tailwind o validación JS) */
+        input:invalid {
+            border-color: #f87171; /* red-400 */
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 min-h-screen flex items-center justify-center p-4">
+
+    <div class="form-container bg-white p-8 md:p-12 rounded-xl shadow-2xl w-full max-w-lg">
+        <h1 class="text-3xl font-bold text-center text-gray-800 mb-8">Crear Cuenta</h1>
+
+        <div id="feedback" class="feedback-message" role="alert"></div>
+
+        <form id="registrationForm" class="space-y-5">
+
+            <div>
+                <label for="nombreCompleto" class="block text-sm font-medium text-gray-700 mb-1">Nombre Completo</label>
+                <input type="text" id="nombreCompleto" name="nombreCompleto" required
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
+                    placeholder="Ingresa tu nombre completo">
+            </div>
+
+            <div>
+                <label for="rut" class="block text-sm font-medium text-gray-700 mb-1">RUT</label>
+                <input type="text" id="rut" name="rut" required
+                    maxlength="10"
+                       pattern="\d{7,8}-[\dKk]"  /* Valida formato básico 12345678-9 o 1234567-9 */
+                    title="Formato RUT: 12345678-9 o 1234567-K"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
+                    placeholder="Ej: 12345678-9">
+                <p id="rutError" class="text-red-500 text-xs mt-1 hidden">Formato de RUT inválido.</p>
+            </div>
+
+            <div>
+                <label for="fechaNacimiento" class="block text-sm font-medium text-gray-700 mb-1">Fecha de Nacimiento</label>
+                <input type="date" id="fechaNacimiento" name="fechaNacimiento" required>
+            </div>
+
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Correo Electrónico</label>
+                <input type="email" id="email" name="email" required
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
+                    placeholder="tu.correo@ejemplo.com">
+            </div>
+
+            <div>
+                <label for="telefono" class="block text-sm font-medium text-gray-700 mb-1">Número de Celular</label>
+                <input type="tel" id="telefono" name="telefono" required /* Ahora es requerido */
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
+                    placeholder="+56 9 1234 5678">
+            </div>
+
+            <div>
+                <label for="direccion" class="block text-sm font-medium text-gray-700 mb-1">Dirección</label>
+                <input type="text" id="direccion" name="direccion" required
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
+                    placeholder="Calle Ejemplo 123, Depto 4">
+            </div>
+
+            <div>
+                <label for="ciudad" class="block text-sm font-medium text-gray-700 mb-1">Ciudad</label>
+                <input type="text" id="ciudad" name="ciudad" required
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
+                    placeholder="Ej: Santiago">
+            </div>
+
+            <div>
+                <label for="region" class="block text-sm font-medium text-gray-700 mb-1">Región</label>
+                <input type="text" id="region" name="region" required
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
+                    placeholder="Ej: Metropolitana">
+            </div>
+
+            <div>
+                <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Contraseña</label>
+                <input type="password" id="password" name="password" required minlength="6" /* Mínimo 6 caracteres */
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
+                    placeholder="Crea una contraseña segura">
+            </div>
+
+            <div>
+                <button type="submit"
+                        class="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-bold py-3 px-4 rounded-lg shadow-lg transform hover:scale-105 transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
+                    Crear cuenta
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script src="js/script.js" defer></script>
+
+</body>
+</html>

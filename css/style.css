@@ -1,0 +1,51 @@
+/* style.css */
+
+/* Asegura la fuente Inter si no es la predeterminada o por si Tailwind no carga */
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+/* Animación sutil para el contenedor del formulario */
+.form-container {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Estilo para mensajes de feedback */
+.feedback-message {
+    padding: 0.75rem;
+    margin-top: 1rem;
+    border-radius: 0.375rem; /* rounded-md */
+    font-size: 0.875rem; /* text-sm */
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    /* Asegúrate de que no tenga contenido inicial visible */
+    min-height: 1.5rem; /* Ajusta según sea necesario para evitar saltos de layout */
+    border: 1px solid transparent; /* Borde inicial transparente */
+}
+
+.feedback-message.show {
+    opacity: 1;
+}
+
+.feedback-message.success {
+    background-color: #d1fae5; /* green-100 */
+    color: #065f46; /* green-800 */
+    border-color: #6ee7b7; /* green-300 */
+}
+
+.feedback-message.error {
+    background-color: #fee2e2; /* red-100 */
+    color: #991b1b; /* red-800 */
+    border-color: #fca5a5; /* red-300 */
+}
+
+/* Puedes añadir más estilos personalizados aquí si los necesitas */
