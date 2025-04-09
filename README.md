@@ -1,5 +1,4 @@
 # formulario_con_db
-# considerando que la base de datos esta creada ingresar script para crear la tabla registros y sus campos
 
 
 CREATE DATABASE IF NOT EXISTS usuarios_db;
