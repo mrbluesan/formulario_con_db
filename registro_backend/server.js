@@ -1,7 +1,6 @@
 // server.js
 
 // --- Carga de Variables de Entorno ---
-// ¡MUY IMPORTANTE! Carga las variables del archivo .env en process.env
 // Debe estar al principio del archivo.
 require('dotenv').config();
 
@@ -35,12 +34,11 @@ const dbConfig = {
     database: process.env.DB_DATABASE || 'usuarios_db'
 };
 
-// --- Verificación de Variables de Entorno de BD (¡NUEVO!) ---
-// Es crucial verificar que las variables necesarias se cargaron desde .env
+// --- Verificación de Variables de Entorno de BD ---
+// Es importante que se carguen desde el .env
 if (!dbConfig.user || !dbConfig.password || !dbConfig.database) {
     console.error("FATAL ERROR: Missing database credentials in .env file (DB_USER, DB_PASSWORD, DB_DATABASE)");
     // Detiene la aplicación si faltan credenciales críticas para evitar errores posteriores.
-    // En producción, podrías manejar esto de forma más robusta (logs, alertas).
     process.exit(1);
 }
 
@@ -49,7 +47,7 @@ app.get('/', (req, res) => {
     res.send('Servidor de registro funcionando!');
 });
 
-// Ruta para manejar el registro de usuarios (POST)
+// Ruta para manejar el registro de usuarios
 app.post('/register', async (req, res) => {
     console.log('Datos recibidos:', req.body);
 
@@ -84,7 +82,7 @@ app.post('/register', async (req, res) => {
         const passwordHash = await bcrypt.hash(password, saltRounds);
         console.log('Password hasheada.');
 
-        // Establecer conexión usando dbConfig (que ahora usa variables de .env)
+        // Establecer conexión usando dbConfig
         connection = await mysql.createConnection(dbConfig);
         console.log('Conectado a la base de datos MySQL.');
 
@@ -101,7 +99,7 @@ app.post('/register', async (req, res) => {
         const [result] = await connection.execute(sql, values);
         console.log('Usuario registrado con ID:', result.insertId);
 
-        // Enviar respuesta de éxito
+        // Enviar respuesta 
         res.status(201).json({ message: '¡Usuario registrado exitosamente!', userId: result.insertId });
 
     } catch (error) {
@@ -114,11 +112,11 @@ app.post('/register', async (req, res) => {
             if (error.message.includes('email')) duplicateField = 'Email';
             return res.status(409).json({ message: `Error: El ${duplicateField} ya está registrado.` });
         }
-        // Este error específico de fecha podría ya no ocurrir gracias a la validación con dayjs, pero se deja por si acaso
+        
         if (error.code === 'ER_TRUNCATED_WRONG_VALUE' && error.message.includes('fecha_nacimiento')) {
             return res.status(400).json({ message: 'Error: El formato de la fecha de nacimiento no es válido para la base de datos.' });
         }
-         // Errores comunes de conexión/autenticación
+         // Errores comunes
         if (error.code === 'ER_ACCESS_DENIED_ERROR') {
             console.error("Error de acceso a la base de datos. Verifica las credenciales en el archivo .env.");
             return res.status(500).json({ message: 'Error interno del servidor (configuración de BD).' });
