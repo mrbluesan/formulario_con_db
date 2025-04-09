@@ -1,4 +1,4 @@
-# formulario_con_db
+# crear base de datos
 
 
 CREATE DATABASE IF NOT EXISTS usuarios_db;
