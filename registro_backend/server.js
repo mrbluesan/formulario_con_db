@@ -1,7 +1,6 @@
 // server.js
 
 // --- Carga de Variables de Entorno ---
-// Debe estar al principio del archivo.
 require('dotenv').config();
 
 // --- Dependencias ---
@@ -18,7 +17,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 // --- Configuración de CORS ---
-// Permite que tu frontend (ej. servido en otro puerto) se comunique con este backend
+// Permite que el frontend (ej. servido en otro puerto) se comunique con este backend
 app.use(cors());
 
 // --- Middlewares ---
@@ -26,7 +25,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // --- Configuración de la Base de Datos ---
-// Lee las credenciales desde process.env (cargadas desde .env)
+// Lee las credenciales desde process.env (cargadas desde .env) el .env lo deje en /registro_backend
 const dbConfig = {
     host: process.env.DB_HOST || 'localhost',
     user: process.env.DB_USER,
@@ -61,7 +60,7 @@ app.post('/register', async (req, res) => {
         return res.status(400).json({ message: 'Faltan campos obligatorios.' });
     }
 
-    // Validar y formatear la fecha usando dayjs
+    // Validar y formatear la fecha usando dayjs, lo hice de esta forma para evitar problemas de formato de fechas
     // El tercer argumento 'true' activa el modo estricto de parseo
     const fechaValida = dayjs(fechaNacimiento, 'YYYY-MM-DD', true).isValid();
     if (!fechaValida) {
